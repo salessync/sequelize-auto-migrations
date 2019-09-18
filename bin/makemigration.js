@@ -80,7 +80,8 @@ let downActions = migrate.parseDifference(currentState.tables, previousState.tab
 
 // sort actions
 migrate.sortActions(upActions);
-migrate.sortActions(downActions);
+// For down actions, we just need to reverse up actions
+downActions = migrate.sortDownActions(downActions, upActions);
 
 let migration = migrate.getMigration(upActions, downActions);
 
